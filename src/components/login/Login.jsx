@@ -104,7 +104,7 @@ const Login = () => {
           textAlign: "center",
           marginBottom: "10px",
           fontSize: "14px",
-          color: "#555",
+          color: "#fff",
         }}
       >
         © {new Date().getFullYear()} Powered by <strong>JibanDev</strong>
