@@ -18,7 +18,7 @@ const Details = () => {
       await updateDoc(userDocRef, {
         blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
       });
-      changeBlock()
+      changeBlock();
     } catch (err) {
       console.log(err);
     }
@@ -85,9 +85,13 @@ const Details = () => {
             <img src="./arrowUp.png" alt="" />
           </div>
         </div>
-        <button onClick={handleBlock}>{
-          isCurrentUserBlocked? "You are Blocked!" : isReceiverBlocked ? "User Blocked" : "Block User"
-        }</button>
+        <button onClick={handleBlock}>
+          {isCurrentUserBlocked
+            ? "You are Blocked!"
+            : isReceiverBlocked
+            ? "User Blocked"
+            : "Block User"}
+        </button>
         <button className="logOut" onClick={() => auth.signOut()}>
           Sign Out
         </button>

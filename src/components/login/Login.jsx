@@ -1,7 +1,10 @@
 import { toast } from "react-toastify";
 import "./login.css";
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -10,9 +13,7 @@ const Login = () => {
     file: null,
     url: "",
   });
-  const [loading, setLoading] = useState(false)
-
-
+  const [loading, setLoading] = useState(false);
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -22,11 +23,10 @@ const Login = () => {
       });
     }
   };
-  
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
 
@@ -55,7 +55,7 @@ const Login = () => {
         }
       }
 
-    //   save user to firebase 
+      //   save user to firebase
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
@@ -74,33 +74,39 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       toast.error(err.message);
-    } finally{
-        setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const formData = new FormData(e.target);
     const { email, password } = Object.fromEntries(formData);
 
-    try{
-    await signInWithEmailAndPassword(auth, email, password);
-    toast.success("Login successful 🎉");
-    }catch(err){
-    console.log(err);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login successful 🎉");
+    } catch (err) {
+      console.log(err);
       toast.error(err.message);
-    } finally{
-        setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    
     <div className="login">
       {/* Copyright / Powered by */}
-      <p style={{ textAlign: "center", marginBottom: "10px", fontSize: "14px", color: "#555" }}>
+      <p
+        style={{
+          textAlign: "center",
+          marginBottom: "10px",
+          fontSize: "14px",
+          color: "#555",
+        }}
+      >
         © {new Date().getFullYear()} Powered by <strong>JibanDev</strong>
       </p>
       <div className="item">
